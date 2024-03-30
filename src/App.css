@@ -1,0 +1,218 @@
+.step-container {
+  position: absolute;
+  top: 0;
+  box-sizing: border-box;
+  height: 10rem;
+  width: 100vw;
+  background-image: url(./assets/images/bg-sidebar-mobile.svg);
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  gap: 1rem;
+}
+
+.step {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  height: 2rem;
+  width: 2rem;
+  border: 1px solid var(--color-white);
+  border-radius: 50%;
+  color: var(--color-white);
+}
+
+.step.active {
+  color: var(--color-marine-blue);
+  background-color: var(--color-pastel-blue);
+  border: none;
+}
+
+.form-container {
+  position: relative;
+  top: 5rem;
+  background-color: var(--color-white);
+  border-radius: 8px;
+  padding: 2rem 1rem;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  bottom: 1rem;
+}
+
+select,
+input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  background-color: inherit;
+  border: 1px solid var(--color-light-gray);
+  color: black;
+  transition: all 0.5s ease;
+}
+
+input:hover,
+select:hover {
+  cursor: pointer;
+  border-color: var(--color-purplish-blue);
+}
+
+.back-button {
+  background-color: inherit;
+  border: none;
+  color: var(--color-cool-gray);
+  font-weight: 600;
+}
+
+footer {
+  position: fixed;
+  box-sizing: border-box;
+  bottom: 0rem;
+  width: 100%;
+  background-color: var(--color-white);
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+#select-plan-id {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+#select-plan-id input[type="radio"] {
+  display: none;
+}
+
+/* Shared styles between RadioButton and ToggleSwitch */
+.radio-button-container {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid var(--color-light-gray);
+  border-radius: 8px;
+  color: var(--color-marine-blue);
+  width: 100%;
+  transition: all 0.25s ease-in-out;
+  gap: 1rem;
+}
+
+.radio-button-container:hover {
+  border: 1px solid var(--color-purplish-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 0.25rem 0.25rem #5d5d5d33;
+  cursor: pointer;
+}
+
+/* //////////////////////// */
+
+#select-plan-id input[type="radio"]:checked + div {
+  background-color: var(--color-magnolia);
+  border: 1px solid var(--color-purplish-blue);
+}
+
+.switch-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  background-color: var(--color-magnolia);
+  border-radius: 8px;
+}
+
+/* select add-on checkboxes */
+#select-add-ons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/* STEP 4 */
+
+.summary {
+  background-color: var(--color-magnolia);
+  padding: 1rem;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.internal-link {
+  text-decoration: underline;
+}
+
+.internal-link:hover {
+  color: var(--color-marine-blue);
+  cursor: pointer;
+}
+
+/* Step 5 */
+
+.thank-you-logo {
+  height: 3.5rem;
+  width: 3.5rem;
+  margin: auto;
+  margin-top: 2rem;
+}
+
+/* Override Mobile CSS with Desktop css at bottom of file */
+@media (min-width: 768px) {
+  .app {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .desktop-app {
+    display: flex;
+  }
+
+  .step-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-image: url(/src/assets/images/bg-sidebar-desktop.svg);
+    width: 16rem;
+    height: 32rem;
+    justify-content: flex-start;
+    border-radius: 8px;
+  }
+
+  .desktop-sidebar {
+    align-items: center;
+  }
+
+  .form-container {
+    top: unset;
+  }
+
+  #select-plan-id {
+    flex-direction: row;
+  }
+
+  /* styles just for radio button (checkmark button does not use these) */
+  .radio-button-container.radio-desktop {
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 8rem;
+    min-height: 10rem;
+    justify-content: space-around;
+  }
+}
