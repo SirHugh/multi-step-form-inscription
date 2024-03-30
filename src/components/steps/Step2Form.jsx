@@ -51,33 +51,6 @@ export function Step2Form() {
       <p>Agrega la informacion Adicional</p>
 
       <div id="form-container">
-        <Input
-          label="Telefono"
-          type="text"
-          name="telefono"
-          autoComplete="off"
-          placeholder="ej. 5643234"
-          onChange={(e) => handleTextChange(e)}
-          value={formState.alumno.telefono}
-        />
-        <Input
-          label="Dirección"
-          type="text"
-          name="direccion"
-          autoComplete="off"
-          placeholder="ej. 5643234"
-          onChange={(e) => handleTextChange(e)}
-          value={formState.alumno.direccion}
-        />
-        <Input
-          label="Barrio"
-          type="text"
-          name="barrio"
-          autoComplete="off"
-          placeholder="ej. 5643234"
-          onChange={(e) => handleTextChange(e)}
-          value={formState.alumno.barrio}
-        />
         <div>Curso Jardin</div>
         <div className="switch-row">
           <p>NO</p>
@@ -97,6 +70,24 @@ export function Step2Form() {
           placeholder="ej. 5"
           onChange={(e) => handleTextChange(e)}
           value={formState.alumno.edad_primer_grado}
+        />
+        <Input
+          label="Alegia a."
+          type="text"
+          name="edad_primer_grado"
+          autoComplete="off"
+          placeholder=""
+          onChange={(e) => handleTextChange(e)}
+          value={formState.alumno.edad_primer_grado}
+        />
+        <Input
+          label="Perfil Psicologico"
+          type="text"
+          name="edad_primer_grado"
+          autoComplete="off"
+          placeholder=""
+          onChange={(e) => handleTextChange(e)}
+          value={formState.alumno.perfil_psicologico}
         />
       </div>
     </div>
