@@ -28,11 +28,11 @@ export function Step2Form() {
     });
   };
 
-  const handleRadioChange = (e) => {
+  const handleTrabajaChange = (e) => {
     dispatch({
-      type: REDUCER_ACTIONS.UPDATE_ALUMNO,
+      type: REDUCER_ACTIONS.UPDATE_MATRICULA,
       field: e.target.name,
-      payload: e.target.value,
+      payload: e.target.checked,
     });
   };
 
@@ -61,7 +61,15 @@ export function Step2Form() {
           />
           <p className="text-primary">SI</p>
         </div>
-
+        <Input
+          label="Cantidad de hermanos/as"
+          type="number"
+          name="cantidad_hermanos"
+          autoComplete="off"
+          placeholder="ej. 1"
+          onChange={(e) => handleTextChange(e)}
+          value={formState.alumno.cantidad_hermanos}
+        />
         <Input
           label="Edad Primer Grado"
           type="number"
@@ -72,23 +80,34 @@ export function Step2Form() {
           value={formState.alumno.edad_primer_grado}
         />
         <Input
-          label="Alegia a."
+          label="Alegico a."
           type="text"
-          name="edad_primer_grado"
+          name="alergico_a"
           autoComplete="off"
           placeholder=""
           onChange={(e) => handleTextChange(e)}
-          value={formState.alumno.edad_primer_grado}
+          value={formState.alumno.alergico_a}
         />
-        <Input
+        <div>Perfil Psicológico</div>
+        <textarea
           label="Perfil Psicologico"
-          type="text"
-          name="edad_primer_grado"
+          type="textarea"
+          name="perfil_psicologico"
           autoComplete="off"
           placeholder=""
           onChange={(e) => handleTextChange(e)}
           value={formState.alumno.perfil_psicologico}
         />
+        <div>¿Trabaja?</div>
+        <div className="switch-row">
+          <p>NO</p>
+          <ToggleSwitch
+            name="trabaja"
+            checked={formState.matricula.trabaja}
+            onChange={handleTrabajaChange}
+          />
+          <p className="text-primary">SI</p>
+        </div>
       </div>
     </div>
   );

@@ -7,15 +7,15 @@ export function SubmitButton({ stepNo, onNextStep, onBackStep }) {
   return (
     <>
       <button
-        className={stepNo === 4 ? "bg-color-secondary" : undefined}
+        className={stepNo === 5 ? "bg-color-secondary" : undefined}
         type="submit"
         onClick={onNextStep}
       >
-        {stepNo < 4 ? "Next Step" : "Confirm"}
+        {stepNo < 5 ? "Siguiente" : "Confirmar"}
       </button>
       {stepNo > 1 && (
         <button className="back-button" onClick={onBackStep}>
-          Go Back
+          Volver
         </button>
       )}
     </>

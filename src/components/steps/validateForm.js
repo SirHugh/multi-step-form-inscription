@@ -9,8 +9,6 @@ const defaultError = "Este campo es requerido";
  * @returns
  */
 const onValidateStep1 = (formState) => {
-  const { name, email, phone } = formState;
-  // default: empty strings
   const errors = {
     name: "",
   };
@@ -35,16 +33,40 @@ const onValidateStep1 = (formState) => {
 };
 
 const onValidateStep2 = (formState) => {
-  const { plan_id } = formState;
   const errors = {
-    plan_id: undefined,
+    name: "",
+  };
+  const hasError = !!errors.name;
+  return { errors, hasError };
+};
+
+const onValidateStep3 = (formState) => {
+  const errors = {
+    name: "",
   };
 
-  // if (plan_id == undefined) {
-  //   errors.plan_id = "You must select an option.";
-  // }
+  const { cedula, nombre, apellido, telefono, relacion } =
+    formState.responsable[0];
 
-  const hasError = !!errors.plan_id;
+  if (!cedula || !nombre || !apellido || !telefono || !relacion) {
+    errors.name = defaultError;
+  }
+
+  const hasError = !!errors.name;
+  return { errors, hasError };
+};
+
+const onValidateStep4 = (formState) => {
+  const errors = {
+    name: "",
+  };
+
+  const { id_grado, fecha_inscripcion, anio_lectivo, es_interno } =
+    formState.matricula;
+  if (!id_grado || !fecha_inscripcion || !anio_lectivo || !es_interno) {
+    errors.name = defaultError;
+  }
+  const hasError = !!errors.name;
   return { errors, hasError };
 };
 
@@ -54,6 +76,10 @@ export const onValidate = (stepNo, formState) => {
       return onValidateStep1(formState);
     case 2:
       return onValidateStep2(formState);
+    case 3:
+      return onValidateStep3(formState);
+    case 4:
+      return onValidateStep4(formState);
     default:
       return { errors: {}, hasError: false };
   }

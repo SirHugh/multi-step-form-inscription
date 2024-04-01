@@ -57,7 +57,10 @@ export function Step4Form() {
         <div className="summary-row border-b">
           <div>
             <p className="text-primary font-semibold">{planIdSummary}</p>
-            <p className="internal-link" onClick={() => onToggleIsYearly(formState)}>
+            <p
+              className="internal-link"
+              onClick={() => onToggleIsYearly(formState)}
+            >
               change
             </p>
           </div>

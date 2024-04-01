@@ -3,196 +3,138 @@ import {
   useForm,
   useFormDispatch,
 } from "../../state/FormContext";
-import { ADD_ONS } from "../../constants";
-import { CheckmarkButton } from "../form/CheckMarkButton";
-import { formatCost } from "./utility";
 import { Input } from "../form/Input";
 
 // optional: move data into data json
 export function Step3Form() {
   const formState = useForm();
   const dispatch = useFormDispatch();
-  const isYearly = formState.isYearly;
-  const HAS_PLUS = true; // adds plus sign to cost
 
-  const handleCheckmarkChange = (e) => {
+  const handleTextChange = (e) => {
     dispatch({
-      type: REDUCER_ACTIONS.UPDATE_INPUT,
+      type: REDUCER_ACTIONS.UPDATE_RESPONSABLE,
+      index: 0,
       field: e.target.name,
-      payload: e.target.checked,
+      payload: e.target.value,
     });
+    console.log(formState);
   };
 
   return (
     <div className="form-container">
-      <h2>Pick add-ons</h2>
-      <p className="mb-1">Add-ons help enhance your gaming experience</p>
-      <div id="select-add-ons">
-        {/* <CheckmarkButton
-          name="add_on_multiplayer"
-          title={ADD_ONS.add_on_multiplayer.title}
-          description={ADD_ONS.add_on_multiplayer.description}
-          value={ADD_ONS.add_on_multiplayer.value}
-          cost={
-            isYearly
-              ? formatCost(
-                  ADD_ONS.add_on_multiplayer.cost.yearly,
-                  isYearly,
-                  HAS_PLUS
-                )
-              : formatCost(
-                  ADD_ONS.add_on_multiplayer.cost.monthly,
-                  isYearly,
-                  HAS_PLUS
-                )
-          }
-          checked={formState.add_on_multiplayer}
-          onChange={handleCheckmarkChange}
+      <h2>Responsable</h2>
+      <p className="mb-1">Complete los datos del responsable del alumno</p>
+      <div className="">
+        <Input
+          label="Documento de Identidad Civil"
+          error={!formState.responsable[0].cedula ? formState.errors.name : ""}
+          type="number"
+          id="cedula"
+          name="cedula"
+          onChange={handleTextChange}
+          value={formState.responsable[0].cedula}
+          placeholder=""
+          required
         />
-        <CheckmarkButton
-          name="add_on_storage"
-          title={ADD_ONS.add_on_storage.title}
-          description={ADD_ONS.add_on_storage.description}
-          value={ADD_ONS.add_on_storage.value}
-          cost={
-            isYearly
-              ? formatCost(
-                  ADD_ONS.add_on_storage.cost.yearly,
-                  isYearly,
-                  HAS_PLUS
-                )
-              : formatCost(
-                  ADD_ONS.add_on_storage.cost.monthly,
-                  isYearly,
-                  HAS_PLUS
-                )
-          }
-          checked={formState.add_on_storage}
-          onChange={handleCheckmarkChange}
+        <Input
+          pattern="[0-9]{8}-[1-9]{1}"
+          type="text"
+          label="Ruc"
+          id="ruc"
+          name="ruc"
+          onChange={handleTextChange}
+          value={formState.responsable[0].ruc}
+          placeholder=""
         />
-        <CheckmarkButton
-          name="add_on_profile"
-          title={ADD_ONS.add_on_profile.title}
-          description={ADD_ONS.add_on_profile.description}
-          value={ADD_ONS.add_on_profile.value}
-          cost={
-            isYearly
-              ? formatCost(
-                  ADD_ONS.add_on_profile.cost.yearly,
-                  isYearly,
-                  HAS_PLUS
-                )
-              : formatCost(
-                  ADD_ONS.add_on_profile.cost.monthly,
-                  isYearly,
-                  HAS_PLUS
-                )
+        <Input
+          label="Nombre"
+          error={!formState.responsable[0].nombre ? formState.errors.name : ""}
+          type="text"
+          id="nombre"
+          name="nombre"
+          onChange={handleTextChange}
+          value={formState.responsable[0].nombre}
+          placeholder=""
+          required
+        />
+        <Input
+          label="Apellido"
+          error={
+            !formState.responsable[0].apellido ? formState.errors.name : ""
           }
-          checked={formState.add_on_profile}
-          onChange={handleCheckmarkChange}
-        /> */}
-        <div className=" grid grid-flow-col items-end gap-6 mb-6 md:grid-cols-3">
-          <div className="relative mt-3">
-            <Input
-              label="Documento de Identidad Civil"
-              type="number"
-              id="cedula"
-              name="cedula"
-              onChange={handleCheckmarkChange}
-              placeholder=""
-              required
-            />
-          </div>
-
-          <div className="relative mt-3">
-            <Input
-              pattern="[0-9]{8}-[1-9]{1}"
-              type="text"
-              label="Ruc"
-              id="Ruc"
-              name="Ruc"
-              onChange={handleCheckmarkChange}
-              placeholder=""
-            />
-          </div>
-          <div className="relative mt-3">
-            <Input
-              pattern="[0-9]{4}-[0-9]{6}"
-              type="text"
-              label="Ej: 0981-111555"
-              id="telefono"
-              name="telefono"
-              onChange={handleCheckmarkChange}
-              placeholder=""
-              required
-            />
-          </div>
-        </div>
-        <div className="relative mt-3">
-          <Input
-            label="Nombre"
-            type="text"
-            id="nombre"
-            name="nombre"
-            onChange={handleCheckmarkChange}
-            placeholder=""
-            required
-          />
-        </div>
-        <div className="relative mt-3">
-          <Input
-            label="Apellido"
-            type="text"
-            id="apellido"
-            name="apellido"
-            onChange={handleCheckmarkChange}
-            placeholder=""
-          />
-        </div>
-        <div className="relative mt-3">
-          <Input
-            label="Correo Electronico"
-            type="email"
-            id="email"
-            name="email"
-            onChange={handleCheckmarkChange}
-            placeholder=""
-          />
-        </div>
-        <div className="relative mt-3">
-          <Input
-            label="Dirección"
-            type="text"
-            id="direccion"
-            name="direccion"
-            onChange={handleCheckmarkChange}
-            placeholder=""
-          />
-        </div>
-
-        <div className=" grid grid-flow-col items-end gap-6 mb-6 md:grid-cols-3">
-          <div className="relative mt-3">
-            <Input
-              label="Ocupacion"
-              type="text"
-              id="ocupacion"
-              name="ocupacion"
-              onChange={handleCheckmarkChange}
-              placeholder=""
-            />
-          </div>
-
-          <div className="relative mt-3">
-            <Input
-              label="Parentezco - Relación"
-              type="text"
-              id="relacion"
-              name="relacion"
-              onChange={handleCheckmarkChange}
-              placeholder=""
-            />
-          </div>
-        </div>
+          type="text"
+          id="apellido"
+          name="apellido"
+          onChange={handleTextChange}
+          value={formState.responsable[0].apellido}
+          placeholder=""
+        />
+        <Input
+          pattern="[0-9]{4}-[0-9]{6}"
+          error={
+            !formState.responsable[0].telefono ? formState.errors.name : ""
+          }
+          type="text"
+          label="Telefono"
+          id="telefono"
+          name="telefono"
+          onChange={handleTextChange}
+          value={formState.responsable[0].telefono}
+          placeholder="Ej: 0981-111555"
+          required
+        />
+        <Input
+          label="Correo Electronico"
+          type="email"
+          id="email"
+          name="email"
+          onChange={handleTextChange}
+          value={formState.responsable[0].email}
+          placeholder="ej. juanperez@gmail.com"
+        />
+        <Input
+          label="Dirección"
+          type="text"
+          id="direccion"
+          name="direccion"
+          onChange={handleTextChange}
+          value={formState.responsable[0].direccion}
+          placeholder=""
+        />
+        <Input
+          label="Ocupacion"
+          type="text"
+          id="ocupacion"
+          name="ocupacion"
+          onChange={handleTextChange}
+          value={formState.responsable[0].ocupacion}
+          placeholder=""
+        />
+        <label htmlFor="genero" className="flex-between">
+          Parentezco - Relación
+          {!formState.responsable[0].relacion && (
+            <span className="text-red font-medium">
+              {formState.errors.name}
+            </span>
+          )}
+        </label>
+        <select
+          required
+          id="relacion"
+          name="relacion"
+          onChange={(e) => handleTextChange(e)}
+          value={formState.responsable[0].relacion}
+          className={
+            !formState.responsable[0].relacion && formState.errors.name
+              ? "border-red"
+              : ""
+          }
+        >
+          <option></option>
+          <option value="Padre">Padre</option>
+          <option value="Madre">Madre</option>
+          <option value="Responsable">Responsable</option>
+        </select>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { Step2Form } from "./Step2Form";
 import { Step3Form } from "./Step3Form";
 import { Step4Form } from "./Step4Form";
 import { Step5Form } from "./Step5Form";
+import { Step6Form } from "./Step6Form";
 import { Footer } from "./Footer";
 
 /**
@@ -24,6 +25,8 @@ function getStepform(step = 1) {
       return Step4Form;
     case 5:
       return Step5Form;
+    case 6:
+      return Step6Form;
     default:
       return Step1Form;
   }

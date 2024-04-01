@@ -40,11 +40,11 @@
   display: flex;
   flex-direction: column;
   bottom: 1rem;
-  width: 30rem;
 }
 
 select,
-input {
+input,
+textarea {
   box-sizing: border-box;
   width: 100%;
   padding: 0.5rem 1rem;
@@ -177,7 +177,7 @@ footer {
   .app {
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     min-height: 100vh;
   }
 
@@ -191,7 +191,7 @@ footer {
     flex-direction: column;
     background-image: url(/src/assets/images/bg-sidebar-desktop.svg);
     width: 16rem;
-    height: 32rem;
+    height: auto;
     justify-content: flex-start;
     border-radius: 8px;
   }

@@ -4,11 +4,44 @@ import {
   useForm,
   useFormDispatch,
 } from "../../state/FormContext";
+import { useEffect } from "react";
+import Axios from "axios";
 
 export function Step1Form() {
   const formState = useForm();
   const dispatch = useFormDispatch();
+  const ApiClient = Axios.create({
+    baseURL: "http://localhost:8000/",
+  });
 
+  //------------------------------------------------
+  useEffect(() => {
+    const getGrado = async () => {
+      try {
+        let response = await ApiClient.get("/academico/grados/");
+        if (response.status === 200) {
+          console.log("Got grados data!");
+          dispatch({ type: REDUCER_ACTIONS.RESET_GRADOS });
+          response.data.map((data) => {
+            dispatch({
+              type: REDUCER_ACTIONS.SET_GRADOS,
+              index: data.id_grado,
+              payload: data,
+            });
+          });
+        } else {
+          throw new Error(
+            `Error ${response.status}: Could not fetch the grados`
+          );
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getGrado();
+  }, []);
+
+  //------------------------------------------------
   const handleTextChange = (e) => {
     dispatch({
       type: REDUCER_ACTIONS.UPDATE_ALUMNO,
@@ -82,7 +115,9 @@ export function Step1Form() {
         name="genero"
         onChange={(e) => handleTextChange(e)}
         value={formState.alumno.genero}
-        className=""
+        className={
+          !formState.alumno.genero && formState.errors.name ? "border-red" : ""
+        }
       >
         <option></option>
         <option value="M">Masculino</option>
@@ -90,10 +125,11 @@ export function Step1Form() {
       </select>
       <Input
         label="Telefono"
-        type="text"
+        pattern="[0-9]{4}-[0-9]{6}"
+        type="tel"
         name="telefono"
         autoComplete="off"
-        placeholder="ej. 5643234"
+        placeholder="ej. 0981-565214"
         onChange={(e) => handleTextChange(e)}
         value={formState.alumno.telefono}
       />
@@ -102,7 +138,7 @@ export function Step1Form() {
         type="text"
         name="direccion"
         autoComplete="off"
-        placeholder="ej. 5643234"
+        placeholder="..."
         onChange={(e) => handleTextChange(e)}
         value={formState.alumno.direccion}
       />
@@ -111,7 +147,7 @@ export function Step1Form() {
         type="text"
         name="barrio"
         autoComplete="off"
-        placeholder="ej. 5643234"
+        placeholder="..."
         onChange={(e) => handleTextChange(e)}
         value={formState.alumno.barrio}
       />

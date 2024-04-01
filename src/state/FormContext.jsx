@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useContext, useReducer } from "react";
 
 const FormContext = createContext(null);
@@ -16,9 +17,14 @@ export function useFormDispatch() {
 // actions stored in ENUM for future action support
 export const REDUCER_ACTIONS = {
   UPDATE_ALUMNO: "UPDATE_ALUMNO",
+  UPDATE_RESPONSABLE: "UPDATE_RESPONSABLE",
+  UPDATE_MATRICULA: "UPDATE_MATRICULA",
   UPDATE_INPUT: "UPDATE_INPUT",
   SET_STEP: "SET_STEP",
   SET_ERROR: "SET_ERROR",
+  SET_GRADOS: "SET_GRADOS",
+  RESET_GRADOS: "RESET_GRADOS",
+  GET_GRADO: "GET_GRADO",
 };
 
 const initialFormState = {
@@ -39,7 +45,30 @@ const initialFormState = {
     cantidad_hermanos: "",
     fotocarnet: "",
   },
-  responsable: [],
+  responsable: [
+    {
+      cedula: "",
+      ruc: "",
+      nombre: "",
+      apellido: "",
+      telefono: "",
+      email: "",
+      direccion: "",
+      tipo: "F",
+      relacion: "",
+      ocupacion: "",
+    },
+  ], // array of objects representing parents/guardians
+  matricula: {
+    id_alumno: "",
+    id_grado: "",
+    fecha_inscripcion: "",
+    anio_lectivo: "",
+    es_activo: true,
+    trabaja: false,
+    es_interno: "",
+  },
+  grados: [],
   currentStep: 1,
   name: "",
   email: "",
@@ -84,6 +113,27 @@ const formReducer = (state, action) => {
         ...state,
         alumno: { ...state.alumno, [action.field]: action.payload },
       };
+    case REDUCER_ACTIONS.UPDATE_RESPONSABLE:
+      return {
+        ...state,
+        responsable: [
+          {
+            ...state.responsable[action.index],
+            [action.field]: action.payload,
+          }, // Add to existing array of objects
+        ],
+      };
+    case REDUCER_ACTIONS.UPDATE_MATRICULA:
+      return {
+        ...state,
+        matricula: { ...state.matricula, [action.field]: action.payload },
+      };
+
+    case REDUCER_ACTIONS.SET_GRADOS:
+      return { ...state, grados: [...state.grados, action.payload] };
+    case REDUCER_ACTIONS.RESET_GRADOS:
+      return { ...state, grados: [] };
+
     case REDUCER_ACTIONS.UPDATE_INPUT:
       return {
         ...state,
