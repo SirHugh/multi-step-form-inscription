@@ -45,6 +45,7 @@ const initialFormState = {
     cantidad_hermanos: "",
     fotocarnet: "",
   },
+
   responsable: [
     {
       cedula: "",
@@ -58,7 +59,8 @@ const initialFormState = {
       relacion: "",
       ocupacion: "",
     },
-  ], // array of objects representing parents/guardians
+  ],
+
   matricula: {
     id_alumno: "",
     id_grado: "",
@@ -68,21 +70,13 @@ const initialFormState = {
     trabaja: false,
     es_interno: "",
   },
+
   grados: [],
+
   currentStep: 1,
-  name: "",
-  email: "",
-  phone: "",
-  isYearly: false,
-  plan_id: undefined,
-  add_on_multiplayer: false,
-  add_on_storage: false,
-  add_on_profile: false,
+
   errors: {
     name: undefined,
-    email: undefined,
-    phone: undefined,
-    plan_id: undefined,
   },
 };
 
