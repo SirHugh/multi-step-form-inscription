@@ -119,7 +119,7 @@ export function Step4Form() {
           }
         >
           <option></option>
-          <option value={true}>Funcación UPC</option>
+          <option value={true}>Fundación UPC</option>
           <option value={false}>Externo</option>
         </select>
 
