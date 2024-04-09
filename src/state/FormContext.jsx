@@ -162,13 +162,34 @@ const formReducer = (state, action) => {
  * https://beta.reactjs.org/learn/scaling-up-with-reducer-and-context
  *
  */
+import { useEffect, useState } from "react";
+import { Axios } from "axios";
+
 export function FormProvider({ children }) {
   const [formState, dispatch] = useReducer(formReducer, initialFormState);
+  const [authenticated, setAuthenticated] = useState(false);
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const token = urlParams.get("auth");
 
+  // const token = new URLSearchParams(location.search).get("token");
+
+  useEffect(() => {
+    // Check the local storage for the authentication token
+
+    if (token) {
+      // If the token is present, send it on each request to the backend server
+      // Axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      setAuthenticated(true);
+    } else {
+      // If the token is not present, the user is not authenticated
+      setAuthenticated(false);
+    }
+  }, []);
   return (
     <FormContext.Provider value={formState}>
       <FormDispatchContext.Provider value={dispatch}>
-        {children}
+        {!authenticated ? <h1 className="center">Loging please</h1> : children}
       </FormDispatchContext.Provider>
     </FormContext.Provider>
   );
