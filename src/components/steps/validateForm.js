@@ -45,10 +45,10 @@ const onValidateStep3 = (formState) => {
     name: "",
   };
 
-  const { cedula, nombre, apellido, telefono, relacion } =
-    formState.responsable[0];
+  const { cedula, nombre, apellido, telefono, tipo_relacion } =
+    formState.responsable;
 
-  if (!cedula || !nombre || !apellido || !telefono || !relacion) {
+  if (!cedula || !nombre || !apellido || !telefono || !tipo_relacion) {
     errors.name = defaultError;
   }
 

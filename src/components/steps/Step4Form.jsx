@@ -74,7 +74,7 @@ export function Step4Form() {
         />
         <label htmlFor="" className="flex-between">
           Año Lectivo
-          {!formState.matricula.fecha_inscripcion && (
+          {!formState.matricula.anio_lectivo && (
             <span className="text-red font-medium">
               {formState.errors.name}
             </span>
@@ -94,7 +94,9 @@ export function Step4Form() {
         >
           <option></option>
           {years.map((y) => (
-            <option value={y}>{y}</option>
+            <option key={y} value={y}>
+              {y}
+            </option>
           ))}
         </select>
 
@@ -145,7 +147,9 @@ export function Step4Form() {
         >
           <option></option>
           {formState.grados.map((grado) => (
-            <option value={grado.id_grado}>{grado.grado}°</option>
+            <option key={grado.id_grado} value={grado.id_grado}>
+              {grado.grado}°
+            </option>
           ))}
         </select>
 

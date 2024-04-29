@@ -3,12 +3,10 @@ import {
   useForm,
   useFormDispatch,
 } from "../../state/FormContext";
-import { RadioButton } from "../form/RadioButton";
 import { ToggleSwitch } from "../form/ToggleSwitch";
-import { PLAN } from "../../constants";
 import { Input } from "../form/Input";
-
-import { formatCost } from "./utility";
+import MyImage from "../../assets/photo-upload.png";
+import { useRef, useState } from "react";
 
 /**
  * Note this form has radio buttons which will only work if rendered once. If rendered
@@ -18,7 +16,8 @@ import { formatCost } from "./utility";
 export function Step2Form() {
   const formState = useForm();
   const dispatch = useFormDispatch();
-  const curso_jardin = formState.alumno.curso_jardin;
+  const [image, setImage] = useState(formState.alumno.fotocarnet);
+  const hiddenFileInput = useRef(null);
 
   const handleCheckmarkChange = (e) => {
     dispatch({
@@ -43,6 +42,21 @@ export function Step2Form() {
       payload: e.target.value,
     });
     console.log(formState);
+  };
+
+  const handleClick = (event) => {
+    hiddenFileInput.current.click();
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setImage(file);
+    dispatch({
+      type: REDUCER_ACTIONS.UPDATE_ALUMNO,
+      field: event.target.name,
+      payload: file,
+    });
+    console.log(formState.alumno);
   };
 
   return (
@@ -107,6 +121,44 @@ export function Step2Form() {
             onChange={handleTrabajaChange}
           />
           <p className="text-primary">SI</p>
+        </div>
+        <div className="">
+          <label htmlFor="fotocarnet" className="image-upload-label">
+            Foto Carnet
+          </label>
+          <div
+            onClick={handleClick}
+            style={{
+              cursor: "pointer",
+              justifyContent: "center",
+              alignContent: "center",
+              display: "flex",
+            }}
+          >
+            {image ? (
+              <img
+                src={image instanceof File ? URL.createObjectURL(image) : image}
+                alt="upload image"
+                className="img-display-after"
+              />
+            ) : (
+              <img
+                src={MyImage}
+                alt="upload image"
+                className="img-display-after"
+              />
+            )}
+
+            <input
+              id="fotocarnet"
+              name="fotocarnet"
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              ref={hiddenFileInput}
+              style={{ display: "none" }}
+            />
+          </div>
         </div>
       </div>
     </div>

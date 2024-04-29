@@ -66,6 +66,7 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   box-shadow: 0 1rem 10rem #00000033;
   background-color: var(--color-white);
@@ -209,4 +210,11 @@ button:hover {
   .desktop-only {
     display: inherit;
   }
+}
+
+.img-display-after {
+  height: 200px;
+  width: 200px;
+  border-radius: 100%;
+  border: solid;
 }

@@ -4,7 +4,7 @@
   box-sizing: border-box;
   height: 10rem;
   width: 100vw;
-  background-image: url(./assets/images/bg-sidebar-mobile.svg);
+  background-image: url(./assets/images/rm251-mind-16-f.jpg);
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -40,6 +40,7 @@
   display: flex;
   flex-direction: column;
   bottom: 1rem;
+  width: 28rem;
 }
 
 select,
@@ -189,7 +190,7 @@ footer {
     position: relative;
     display: flex;
     flex-direction: column;
-    background-image: url(/src/assets/images/bg-sidebar-desktop.svg);
+    background-image: url(/src/assets/images/rm251-mind-16-f.jpg);
     width: 16rem;
     height: auto;
     justify-content: flex-start;

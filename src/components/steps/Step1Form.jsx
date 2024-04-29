@@ -1,11 +1,16 @@
 import { Input } from "../form/Input";
 import {
+  getAlumno,
+  getMatricula,
   REDUCER_ACTIONS,
+  searchAlumno,
   useForm,
   useFormDispatch,
 } from "../../state/FormContext";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import Axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+import { BiError } from "react-icons/bi";
 
 export function Step1Form() {
   const formState = useForm();
@@ -48,11 +53,65 @@ export function Step1Form() {
       field: e.target.name,
       payload: e.target.value,
     });
-    console.log(formState);
+    console.log(formState.alumno);
+  };
+
+  const handdleSearch = async () => {
+    if (!formState.alumno.cedula) {
+      console.log("no hay cedula");
+      return;
+    }
+    try {
+      const res = await searchAlumno(formState.alumno.cedula);
+      if (!res.data[0]) {
+        console.log("no hay datos");
+        return;
+      }
+      const cedula = res.data[0].cedula;
+      const anio_lectivo = new Date().getFullYear();
+      const es_activo = true; //activo
+      const res2 = await getMatricula(cedula, anio_lectivo, es_activo);
+      if (res2.data[0]) {
+        dispatch({
+          type: REDUCER_ACTIONS.UPDATE_ALUMNO,
+          field: "cedula",
+          payload: "",
+        });
+        toast(
+          "El numero de cedula corresponde a un alumno que se encuentra activo en el presente año lectivo",
+
+          {
+            duration: 5000,
+            icon: <BiError color="red" fontSize="5.5em" />,
+          }
+        );
+        return;
+      }
+      console.log(res2.data[0]);
+      const id = res.data[0].id_alumno;
+      const res3 = await getAlumno(id);
+      console.log(res3.data);
+      dispatch({
+        type: REDUCER_ACTIONS.INITIALIZE_ALUMNO,
+        payload: res3.data,
+      });
+      dispatch({
+        type: REDUCER_ACTIONS.UPDATE_MATRICULA,
+        field: "id_alumno",
+        payload: res3.data.id_alumno,
+      });
+      dispatch({
+        type: REDUCER_ACTIONS.UPDATE_RESPONSABLE,
+        field: "id_alumno",
+        payload: res3.data.id_alumno,
+      });
+    } catch (error) {}
+    console.log(formState.alumno);
   };
 
   return (
     <div className="form-container">
+      <Toaster dur />
       <h2>Informacion Personal</h2>
       <p className="mb-1">Favor proveer los siguientes datos del alumno.</p>
 
@@ -66,6 +125,7 @@ export function Step1Form() {
         onChange={(e) => handleTextChange(e)}
         value={formState.alumno.cedula}
         required
+        onBlur={() => handdleSearch()}
       />
       <Input
         label="Nombre"
