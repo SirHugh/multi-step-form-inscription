@@ -112,11 +112,11 @@ export function Step1Form() {
   return (
     <div className="form-container">
       <Toaster dur />
-      <h2>Informacion Personal</h2>
+      <h2>Informacion Del Alumno</h2>
       <p className="mb-1">Favor proveer los siguientes datos del alumno.</p>
 
       <Input
-        label="Cedula"
+        label={`Cedula`}
         error={!formState.alumno.cedula ? formState.errors.name : ""}
         type="number"
         name="cedula"

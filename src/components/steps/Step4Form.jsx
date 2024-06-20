@@ -63,7 +63,8 @@ export function Step4Form() {
       <div className="">
         <Input
           label="Fecha de Matriculacion"
-          type="date"
+          type="text"
+          disabled
           error={
             !formState.matricula.fecha_inscripcion ? formState.errors.name : ""
           }
@@ -84,6 +85,7 @@ export function Step4Form() {
           required
           id="anio_lectivo"
           name="anio_lectivo"
+          disabled
           onChange={(e) => handleTextChange(e)}
           value={formState.matricula.anio_lectivo}
           className={

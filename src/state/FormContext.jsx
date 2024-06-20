@@ -86,6 +86,13 @@ export const REDUCER_ACTIONS = {
   GET_GRADO: "GET_GRADO",
 };
 
+const date = new Date();
+const options = {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+};
+
 const initialFormState = {
   alumno: {
     id_alumno: "",
@@ -126,8 +133,8 @@ const initialFormState = {
   matricula: {
     id_alumno: "",
     id_grado: "",
-    fecha_inscripcion: "",
-    anio_lectivo: "",
+    fecha_inscripcion: date.toLocaleDateString("en-CA", options),
+    anio_lectivo: new Date().getFullYear(),
     es_activo: false,
     trabaja: false,
     es_interno: "",
