@@ -27,6 +27,8 @@ export function Step2Form() {
     });
   };
 
+  const log = () => {};
+
   const handleTrabajaChange = (e) => {
     dispatch({
       type: REDUCER_ACTIONS.UPDATE_MATRICULA,
