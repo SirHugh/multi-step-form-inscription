@@ -7,6 +7,15 @@ import {
 } from "../../state/FormContext";
 import { Input } from "../form/Input";
 
+const renderLabel = (label, required) => {
+  return (
+    <span>
+      {label}
+      {required && <span style={{ color: 'red' }}>*</span>}
+    </span>
+  );
+};
+
 // optional: move data into data json
 export function Step3Form() {
   const formState = useForm();
@@ -62,7 +71,7 @@ export function Step3Form() {
       <p className="mb-1">Complete los datos del responsable del alumno</p>
       <div className="">
         <Input
-          label="Documento de Identidad Civil"
+          label={renderLabel('Cedula', true)}
           autoComplete="off"
           error={!formState.responsable.cedula ? formState.errors.name : ""}
           type="number"
@@ -85,7 +94,7 @@ export function Step3Form() {
           placeholder=""
         />
         <Input
-          label="Nombre"
+          label={renderLabel('Nombre', true)}
           error={!formState.responsable.nombre ? formState.errors.name : ""}
           type="text"
           id="nombre"
@@ -96,7 +105,7 @@ export function Step3Form() {
           required
         />
         <Input
-          label="Apellido"
+          label={renderLabel('Apellido', true)}
           error={!formState.responsable.apellido ? formState.errors.name : ""}
           type="text"
           id="apellido"
@@ -109,7 +118,7 @@ export function Step3Form() {
           pattern="[0-9]{4}-[0-9]{6}"
           error={!formState.responsable.telefono ? formState.errors.name : ""}
           type="text"
-          label="Telefono"
+          label={renderLabel('Teléfono', true)}
           id="telefono"
           name="telefono"
           onChange={handleTextChange}
@@ -145,7 +154,7 @@ export function Step3Form() {
           placeholder=""
         />
         <label htmlFor="tipo_relacion" className="flex-between">
-          Parentezco - Relación
+          {renderLabel('Parentezco - Relación', true)}
           {!formState.responsable.tipo_relacion && (
             <span className="text-red font-medium">
               {formState.errors.name}

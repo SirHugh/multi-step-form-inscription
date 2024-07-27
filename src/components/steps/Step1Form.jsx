@@ -46,6 +46,16 @@ export function Step1Form() {
     getGrado();
   }, []);
 
+  const renderLabel = (label, required) => {
+    return (
+      <span>
+        {label}
+        {required && <span style={{ color: 'red' }}>*</span>}
+      </span>
+    );
+  };
+  
+
   //------------------------------------------------
   const handleTextChange = (e) => {
     dispatch({
@@ -114,9 +124,9 @@ export function Step1Form() {
       <Toaster dur />
       <h2>Informacion Del Alumno</h2>
       <p className="mb-1">Favor proveer los siguientes datos del alumno.</p>
-
+  
       <Input
-        label={`Cedula`}
+        label={renderLabel('Cedula', true)}
         error={!formState.alumno.cedula ? formState.errors.name : ""}
         type="number"
         name="cedula"
@@ -128,7 +138,7 @@ export function Step1Form() {
         onBlur={() => handdleSearch()}
       />
       <Input
-        label="Nombre"
+        label={renderLabel('Nombre', true)}
         error={!formState.alumno.nombre ? formState.errors.name : ""}
         type="text"
         name="nombre"
@@ -138,38 +148,42 @@ export function Step1Form() {
         required
       />
       <Input
-        label="Apellido"
+        label={renderLabel('Apellido', true)}
         error={!formState.alumno.apellido ? formState.errors.name : ""}
         type="text"
         name="apellido"
         placeholder="ej. Martinez Ortiz"
         onChange={(e) => handleTextChange(e)}
         value={formState.alumno.apellido}
+        required
       />
       <Input
-        label="Fecha De Nacimiento"
+        label={renderLabel('Fecha De Nacimiento', true)}
         error={!formState.alumno.fecha_nac ? formState.errors.name : ""}
         type="date"
         name="fecha_nac"
         onChange={(e) => handleTextChange(e)}
         value={formState.alumno.fecha_nac}
+        required
       />
       <Input
-        label="Nacionalidad"
+        label={renderLabel('Nacionalidad', true)}
         error={!formState.alumno.nacionalidad ? formState.errors.name : ""}
         type="text"
         name="nacionalidad"
         placeholder="ej. Paraguaya"
         onChange={(e) => handleTextChange(e)}
         value={formState.alumno.nacionalidad}
+        required
       />
       <label htmlFor="genero" className="flex-between">
-        Sexo
+        {renderLabel('Sexo', true)}
         {!formState.alumno.genero && (
           <span className="text-red font-medium">{formState.errors.name}</span>
         )}
       </label>
       <select
+        label={renderLabel('Nacionalidad', true)}
         required
         id="genero"
         name="genero"
@@ -184,7 +198,7 @@ export function Step1Form() {
         <option value="F">Femenino</option>
       </select>
       <Input
-        label="Telefono"
+        label={renderLabel('Telefono', false)}
         pattern="[0-9]{4}-[0-9]{6}"
         type="tel"
         name="telefono"
@@ -194,7 +208,7 @@ export function Step1Form() {
         value={formState.alumno.telefono}
       />
       <Input
-        label="Dirección"
+        label={renderLabel('Dirección', false)}
         type="text"
         name="direccion"
         autoComplete="off"
@@ -203,7 +217,7 @@ export function Step1Form() {
         value={formState.alumno.direccion}
       />
       <Input
-        label="Barrio"
+        label={renderLabel('Barrio', false)}
         type="text"
         name="barrio"
         autoComplete="off"
@@ -212,5 +226,5 @@ export function Step1Form() {
         value={formState.alumno.barrio}
       />
     </div>
-  );
+  );  
 }
