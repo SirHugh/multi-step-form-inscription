@@ -23,7 +23,7 @@ const STEPS = {
   },
   step5: {
     number: 5,
-    title: "PASO 4",
+    title: "PASO 5",
     description: "RESUMEN",
   },
 };

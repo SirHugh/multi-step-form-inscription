@@ -56,13 +56,22 @@ export function Step4Form() {
     console.log(formState);
   };
 
+  const renderLabel = (label, required) => {
+    return (
+      <span>
+        {label}
+        {required && <span style={{ color: 'red' }}>*</span>}
+      </span>
+    );
+  };
+
   return (
     <div className="form-container">
       <h2>Academico</h2>
       <p className="mb-1">Complete los datos de la matriculación</p>
       <div className="">
         <Input
-          label="Fecha de Matriculacion"
+          label={renderLabel('Fecha de matriculación', true)}
           type="text"
           disabled
           error={
@@ -74,7 +83,7 @@ export function Step4Form() {
           value={formState.matricula.fecha_inscripcion}
         />
         <label htmlFor="" className="flex-between">
-          Año Lectivo
+        {renderLabel('Año lectivo', true)}
           {!formState.matricula.anio_lectivo && (
             <span className="text-red font-medium">
               {formState.errors.name}
@@ -103,7 +112,7 @@ export function Step4Form() {
         </select>
 
         <label htmlFor="" className="flex-between">
-          Origen
+        {renderLabel('Origen', true)}
           {!formState.matricula.es_interno && (
             <span className="text-red font-medium">
               {formState.errors.name}
@@ -128,7 +137,7 @@ export function Step4Form() {
         </select>
 
         <label htmlFor="genero" className="flex-between">
-          Grado
+        {renderLabel('Grado', true)}
           {!formState.matricula.id_grado && (
             <span className="text-red font-medium">
               {formState.errors.name}
@@ -150,25 +159,25 @@ export function Step4Form() {
           <option></option>
           {formState.grados.map((grado) => (
             <option key={grado.id_grado} value={grado.id_grado}>
-              {grado.grado}°
+              {grado.nombre + " Seccion " + grado.seccion + " Turno " + grado.turno}
             </option>
           ))}
         </select>
 
         <Input
-          label="Grado"
+          label={renderLabel('Grado', true)}
           type="text"
           readOnly={true}
           value={grado[0].nombre}
         />
         <Input
-          label="Nivel"
+          label={renderLabel('Nivel', true)}
           type="text"
           readOnly={true}
           value={grado[0].nivel}
         />
         <Input
-          label="turno"
+          label={renderLabel('Turno', true)}
           type="text"
           readOnly={true}
           value={grado[0].turno}
